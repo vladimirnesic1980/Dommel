@@ -19,3 +19,4 @@ nuget.exe
 *.sln.ide
 .build/
 *.ldf
+BenchmarkDotNet.Artifacts/
