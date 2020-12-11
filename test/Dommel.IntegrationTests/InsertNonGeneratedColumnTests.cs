@@ -13,13 +13,13 @@ namespace Dommel.IntegrationTests
         {
             using var con = database.GetConnection();
             // Arrange
-            var generatedId = Guid.NewGuid();
+            Guid generatedId = Guid.NewGuid();
 
             // Act
             _ = await con.InsertAsync(new Baz { BazId = generatedId });
 
             // Assert
-            var product = await con.GetAsync<Baz>(generatedId);
+            Baz? product = await con.GetAsync<Baz>(generatedId);
             Assert.NotNull(product);
             Assert.Equal(generatedId, product!.BazId);
             Assert.Equal("Baz", product.Name);

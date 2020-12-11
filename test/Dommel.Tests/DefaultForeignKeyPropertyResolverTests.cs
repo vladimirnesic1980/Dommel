@@ -11,7 +11,7 @@ namespace Dommel.Tests
         public void Resolves_ThrowsWhenUnableToFind()
         {
             var resolver = new DefaultForeignKeyPropertyResolver();
-            var fk = Assert.Throws<InvalidOperationException>(() => resolver.ResolveForeignKeyProperty(typeof(Product), typeof(Product), out var fkRelation));
+            var fk = Assert.Throws<InvalidOperationException>(() => resolver.ResolveForeignKeyProperty(typeof(Product), typeof(Product), out ForeignKeyRelation fkRelation));
             Assert.Equal("Could not resolve foreign key property. Source type 'Dommel.Tests.Product'; including type: 'Dommel.Tests.Product'.", fk.Message);
         }
 
@@ -22,7 +22,7 @@ namespace Dommel.Tests
             var resolver = new DefaultForeignKeyPropertyResolver();
 
             // Act
-            var fk = resolver.ResolveForeignKeyProperty(typeof(Product), typeof(Category), out var fkRelation);
+            var fk = resolver.ResolveForeignKeyProperty(typeof(Product), typeof(Category), out ForeignKeyRelation fkRelation);
 
             // Assert
             Assert.Equal(typeof(Product).GetProperty(nameof(Product.CategoryId)), fk);
@@ -36,7 +36,7 @@ namespace Dommel.Tests
             var resolver = new DefaultForeignKeyPropertyResolver();
 
             // Act
-            var fk = resolver.ResolveForeignKeyProperty(typeof(Product), typeof(ProductOption), out var fkRelation);
+            var fk = resolver.ResolveForeignKeyProperty(typeof(Product), typeof(ProductOption), out ForeignKeyRelation fkRelation);
 
             // Assert
             Assert.Equal(typeof(ProductOption).GetProperty(nameof(ProductOption.ProductId)), fk);
@@ -50,7 +50,7 @@ namespace Dommel.Tests
             var resolver = new DefaultForeignKeyPropertyResolver();
 
             // Act
-            var fk = resolver.ResolveForeignKeyProperty(typeof(ProductDto), typeof(CategoryDto), out var fkRelation);
+            var fk = resolver.ResolveForeignKeyProperty(typeof(ProductDto), typeof(CategoryDto), out ForeignKeyRelation fkRelation);
 
             // Assert
             Assert.Equal(typeof(ProductDto).GetProperty(nameof(ProductDto.CategoryId)), fk);
@@ -64,7 +64,7 @@ namespace Dommel.Tests
             var resolver = new DefaultForeignKeyPropertyResolver();
 
             // Act
-            var fk = resolver.ResolveForeignKeyProperty(typeof(ProductDto), typeof(ProductOptionDto), out var fkRelation);
+            var fk = resolver.ResolveForeignKeyProperty(typeof(ProductDto), typeof(ProductOptionDto), out ForeignKeyRelation fkRelation);
 
             // Assert
             Assert.Equal(typeof(ProductOptionDto).GetProperty(nameof(ProductOptionDto.ProductId)), fk);

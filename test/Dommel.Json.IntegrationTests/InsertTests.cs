@@ -20,7 +20,7 @@ namespace Dommel.Json.IntegrationTests
                 Data = null!,
             });
 
-            var lead = con.Get<Lead>(id);
+            Lead? lead = con.Get<Lead>(id);
             Assert.NotNull(lead);
             Assert.Null(lead!.Data);
         }
@@ -36,7 +36,7 @@ namespace Dommel.Json.IntegrationTests
                 Data = null!,
             });
 
-            var lead = await con.GetAsync<Lead>(id);
+            Lead? lead = await con.GetAsync<Lead>(id);
             Assert.NotNull(lead);
             Assert.Null(lead!.Data);
         }
@@ -52,7 +52,7 @@ namespace Dommel.Json.IntegrationTests
                 Data = new LeadData(),
             });
 
-            var lead = con.Get<Lead>(id);
+            Lead? lead = con.Get<Lead>(id);
             Assert.NotNull(lead);
             Assert.NotNull(lead!.Data);
             Assert.Null(lead.Data?.FirstName);
@@ -69,7 +69,7 @@ namespace Dommel.Json.IntegrationTests
                 Data = new LeadData(),
             });
 
-            var lead = await con.GetAsync<Lead>(id);
+            Lead? lead = await con.GetAsync<Lead>(id);
             Assert.NotNull(lead);
             Assert.NotNull(lead!.Data);
             Assert.Null(lead.Data?.FirstName);
@@ -92,7 +92,7 @@ namespace Dommel.Json.IntegrationTests
                 }
             });
 
-            var lead = con.Get<Lead>(id);
+            Lead? lead = con.Get<Lead>(id);
             Assert.NotNull(lead);
             Assert.NotNull(lead!.Data);
             Assert.NotNull(lead.Data?.FirstName);
@@ -115,7 +115,7 @@ namespace Dommel.Json.IntegrationTests
                 }
             });
 
-            var lead = await con.GetAsync<Lead>(id);
+            Lead? lead = await con.GetAsync<Lead>(id);
             Assert.NotNull(lead);
             Assert.NotNull(lead!.Data);
             Assert.NotNull(lead.Data?.FirstName);
@@ -136,7 +136,7 @@ namespace Dommel.Json.IntegrationTests
                 }
             });
 
-            var lead = con.Get<Lead>(id);
+            Lead? lead = con.Get<Lead>(id);
             Assert.NotNull(lead);
             Assert.NotNull(lead!.Metadata);
             Assert.Equal("Bar", Assert.Contains("Foo", lead.Metadata));
@@ -158,7 +158,7 @@ namespace Dommel.Json.IntegrationTests
                 }
             });
 
-            var lead = await con.GetAsync<Lead>(id);
+            Lead? lead = await con.GetAsync<Lead>(id);
             Assert.NotNull(lead);
             Assert.NotNull(lead!.Metadata);
             Assert.Equal("Bar", Assert.Contains("Foo", lead.Metadata));

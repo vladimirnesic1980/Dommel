@@ -68,7 +68,7 @@ namespace Dommel
 
         private static string BuildAnyPredicate(ISqlBuilder sqlBuilder, Type type)
         {
-            var cacheKey = new QueryCacheKey(QueryCacheType.Any, sqlBuilder, type);
+            QueryCacheKey cacheKey = new QueryCacheKey(QueryCacheType.Any, sqlBuilder, type);
             if (!QueryCache.TryGetValue(cacheKey, out var sql))
             {
                 var tableName = Resolvers.Table(type, sqlBuilder);

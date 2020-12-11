@@ -43,7 +43,7 @@ namespace Dommel
                 (type, columnName) =>
                 {
                     var cacheKey = type + columnName;
-                    if (!ColumnNameCache.TryGetValue(cacheKey, out var propertyInfo))
+                    if (!ColumnNameCache.TryGetValue(cacheKey, out PropertyInfo? propertyInfo))
                     {
                         propertyInfo = type.GetProperties().FirstOrDefault(p => p.GetCustomAttribute<ColumnAttribute>()?.Name == columnName || p.Name == columnName);
                         if (propertyInfo is null)

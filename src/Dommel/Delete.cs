@@ -43,7 +43,7 @@ namespace Dommel
 
         internal static string BuildDeleteQuery(ISqlBuilder sqlBuilder, Type type)
         {
-            var cacheKey = new QueryCacheKey(QueryCacheType.Delete, sqlBuilder, type);
+            QueryCacheKey cacheKey = new QueryCacheKey(QueryCacheType.Delete, sqlBuilder, type);
             if (!QueryCache.TryGetValue(cacheKey, out var sql))
             {
                 var tableName = Resolvers.Table(type, sqlBuilder);
@@ -135,7 +135,7 @@ namespace Dommel
 
         internal static string BuildDeleteAllQuery(ISqlBuilder sqlBuilder, Type type)
         {
-            var cacheKey = new QueryCacheKey(QueryCacheType.DeleteAll, sqlBuilder, type);
+            QueryCacheKey cacheKey = new QueryCacheKey(QueryCacheType.DeleteAll, sqlBuilder, type);
             if (!QueryCache.TryGetValue(cacheKey, out var sql))
             {
                 var tableName = Resolvers.Table(type, sqlBuilder);

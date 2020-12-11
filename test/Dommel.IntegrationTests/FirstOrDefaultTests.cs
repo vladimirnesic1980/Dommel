@@ -11,7 +11,7 @@ namespace Dommel.IntegrationTests
         public void FirstOrDefault_Equals(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var product = con.FirstOrDefault<Product>(p => p.CategoryId == 1);
+            Product? product = con.FirstOrDefault<Product>(p => p.CategoryId == 1);
             Assert.NotNull(product);
         }
         [Theory]
@@ -19,7 +19,7 @@ namespace Dommel.IntegrationTests
         public async Task FirstOrDefaultAsync_Equals(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var product = await con.FirstOrDefaultAsync<Product>(p => p.CategoryId == 1);
+            Product? product = await con.FirstOrDefaultAsync<Product>(p => p.CategoryId == 1);
             Assert.NotNull(product);
         }
 
@@ -28,7 +28,7 @@ namespace Dommel.IntegrationTests
         public void FirstOrDefault_ContainsConstant(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var product = con.FirstOrDefault<Product>(p => p.Name!.Contains("Anton"));
+            Product? product = con.FirstOrDefault<Product>(p => p.Name!.Contains("Anton"));
             Assert.NotNull(product);
         }
 
@@ -37,7 +37,7 @@ namespace Dommel.IntegrationTests
         public async Task FirstOrDefaultAsync_ContainsConstant(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var product = await con.FirstOrDefaultAsync<Product>(p => p.Name!.Contains("Anton"));
+            Product? product = await con.FirstOrDefaultAsync<Product>(p => p.Name!.Contains("Anton"));
             Assert.NotNull(product);
         }
 
@@ -47,7 +47,7 @@ namespace Dommel.IntegrationTests
         {
             var productName = "Anton";
             using var con = database.GetConnection();
-            var product = con.FirstOrDefault<Product>(p => p.Name!.Contains(productName));
+            Product? product = con.FirstOrDefault<Product>(p => p.Name!.Contains(productName));
             Assert.NotNull(product);
         }
 
@@ -57,7 +57,7 @@ namespace Dommel.IntegrationTests
         {
             var productName = "Anton";
             using var con = database.GetConnection();
-            var product = await con.FirstOrDefaultAsync<Product>(p => p.Name!.Contains(productName));
+            Product? product = await con.FirstOrDefaultAsync<Product>(p => p.Name!.Contains(productName));
             Assert.NotNull(product);
         }
 
@@ -67,7 +67,7 @@ namespace Dommel.IntegrationTests
         {
             var productName = "Cha";
             using var con = database.GetConnection();
-            var product = con.FirstOrDefault<Product>(p => p.Name!.StartsWith(productName));
+            Product? product = con.FirstOrDefault<Product>(p => p.Name!.StartsWith(productName));
             Assert.NotNull(product);
         }
 
@@ -77,7 +77,7 @@ namespace Dommel.IntegrationTests
         {
             var productName = "Cha";
             using var con = database.GetConnection();
-            var product = await con.FirstOrDefaultAsync<Product>(p => p.Name!.StartsWith(productName));
+            Product? product = await con.FirstOrDefaultAsync<Product>(p => p.Name!.StartsWith(productName));
             Assert.NotNull(product);
         }
 
@@ -87,7 +87,7 @@ namespace Dommel.IntegrationTests
         {
             var productName = "2";
             using var con = database.GetConnection();
-            var product = con.FirstOrDefault<Product>(p => p.Name!.EndsWith(productName));
+            Product? product = con.FirstOrDefault<Product>(p => p.Name!.EndsWith(productName));
             Assert.NotNull(product);
         }
 
@@ -97,7 +97,7 @@ namespace Dommel.IntegrationTests
         {
             var productName = "2";
             using var con = database.GetConnection();
-            var product = await con.FirstOrDefaultAsync<Product>(p => p.Name!.EndsWith(productName));
+            Product? product = await con.FirstOrDefaultAsync<Product>(p => p.Name!.EndsWith(productName));
             Assert.NotNull(product);
         }
     }

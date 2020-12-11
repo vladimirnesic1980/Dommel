@@ -15,15 +15,16 @@ namespace Dommel
         /// Finds the key properties by looking for properties with the
         /// [<see cref="KeyAttribute"/>] attribute or with the name 'Id'.
         /// </summary>
-        public ColumnPropertyInfo[] ResolveKeyProperties(Type type)
+        public ColumnPropertyInfo[] ResolveKeyProperties(Type type, bool mandatory = true)
         {
             var keyProps = Resolvers
                 .Properties(type)
                 .Select(x => x.Property)
-                .Where(p => string.Equals(p.Name, "Id", StringComparison.OrdinalIgnoreCase) || p.GetCustomAttribute<KeyAttribute>() != null)
+                .Where(p => string.Equals(p.Name, "Id", StringComparison.OrdinalIgnoreCase) ||
+                            p.GetCustomAttribute<KeyAttribute>() != null)
                 .ToArray();
 
-            if (keyProps.Length == 0)
+            if (keyProps.Length == 0 && mandatory)
             {
                 throw new InvalidOperationException($"Could not find the key properties for type '{type.FullName}'.");
             }

@@ -14,8 +14,8 @@ namespace Dommel.IntegrationTests
         public void Delete(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var id = Convert.ToInt32(con.Insert(new Product { Name = "blah" }));
-            var product = con.Get<Product>(id);
+            int id = Convert.ToInt32(con.Insert(new Product { Name = "blah" }));
+            Product? product = con.Get<Product>(id);
             Assert.NotNull(product);
             Assert.Equal("blah", product!.Name);
             Assert.Equal(id, product.ProductId);
@@ -29,8 +29,8 @@ namespace Dommel.IntegrationTests
         public async Task DeleteAsync(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var id = Convert.ToInt32(await con.InsertAsync(new Product { Name = "blah" }));
-            var product = await con.GetAsync<Product>(id);
+            int id = Convert.ToInt32(await con.InsertAsync(new Product { Name = "blah" }));
+            Product? product = await con.GetAsync<Product>(id);
             Assert.NotNull(product);
             Assert.Equal("blah", product!.Name);
             Assert.Equal(id, product.ProductId);

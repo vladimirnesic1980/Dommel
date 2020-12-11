@@ -11,7 +11,7 @@ namespace Dommel.IntegrationTests
         public void Get(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var product = con.Get<Product, Category, Product>(1, (p, c) =>
+            Product? product = con.Get<Product, Category, Product>(1, (p, c) =>
             {
                 p.Category = c;
                 return p;
@@ -28,7 +28,7 @@ namespace Dommel.IntegrationTests
         public async Task GetAsync(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var product = await con.GetAsync<Product, Category, Product>(1, (p, c) =>
+            Product? product = await con.GetAsync<Product, Category, Product>(1, (p, c) =>
             {
                 p.Category = c;
                 return p;

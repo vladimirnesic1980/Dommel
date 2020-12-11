@@ -21,14 +21,14 @@ namespace Dommel
         /// <returns>The foreign key property for <paramref name="sourceType"/> and <paramref name="includingType"/>.</returns>
         public virtual PropertyInfo ResolveForeignKeyProperty(Type sourceType, Type includingType, out ForeignKeyRelation foreignKeyRelation)
         {
-            var oneToOneFk = ResolveOneToOne(sourceType, includingType);
+            PropertyInfo? oneToOneFk = ResolveOneToOne(sourceType, includingType);
             if (oneToOneFk != null)
             {
                 foreignKeyRelation = ForeignKeyRelation.OneToOne;
                 return oneToOneFk;
             }
 
-            var oneToManyFk = ResolveOneToMany(sourceType, includingType);
+            PropertyInfo? oneToManyFk = ResolveOneToMany(sourceType, includingType);
             if (oneToManyFk != null)
             {
                 foreignKeyRelation = ForeignKeyRelation.OneToMany;

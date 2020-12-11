@@ -18,7 +18,7 @@ namespace Dommel.Tests
         [InlineData(QueryCacheType.Any)]
         internal void SetsCache(QueryCacheType queryCacheType)
         {
-            var cacheKey = new QueryCacheKey(queryCacheType, new DummySqlBuilder(), typeof(Foo));
+            QueryCacheKey cacheKey = new QueryCacheKey(queryCacheType, new DummySqlBuilder(), typeof(Foo));
             DommelMapper.QueryCache[cacheKey] = "blah";
             Assert.Equal("blah", DommelMapper.QueryCache[cacheKey]);
         }

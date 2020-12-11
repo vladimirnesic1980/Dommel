@@ -22,12 +22,13 @@ namespace Dommel
         /// Gets the key properties for the specified type, using the configured <see cref="IKeyPropertyResolver"/>.
         /// </summary>
         /// <param name="type">The <see cref="Type"/> to get the key properties for.</param>
+        /// <param name="mandatory">Keys are mandatory for type</param>
         /// <returns>The key properties for <paramref name="type"/>.</returns>
-        public static ColumnPropertyInfo[] KeyProperties(Type type)
+        public static ColumnPropertyInfo[] KeyProperties(Type type, bool mandatory = true)
         {
             if (!TypeKeyPropertiesCache.TryGetValue(type, out var keyProperties))
             {
-                keyProperties = DommelMapper.KeyPropertyResolver.ResolveKeyProperties(type);
+                keyProperties = DommelMapper.KeyPropertyResolver.ResolveKeyProperties(type, mandatory);
                 TypeKeyPropertiesCache.TryAdd(type, keyProperties);
             }
 
@@ -45,11 +46,11 @@ namespace Dommel
         /// <returns>The foreign key property for <paramref name="sourceType"/> and <paramref name="includingType"/>.</returns>
         public static PropertyInfo ForeignKeyProperty(Type sourceType, Type includingType, out ForeignKeyRelation foreignKeyRelation)
         {
-            var key = $"{sourceType};{includingType}";
-            if (!TypeForeignKeyPropertyCache.TryGetValue(key, out var foreignKeyInfo))
+            string? key = $"{sourceType};{includingType}";
+            if (!TypeForeignKeyPropertyCache.TryGetValue(key, out ForeignKeyInfo foreignKeyInfo))
             {
                 // Resolve the property and relation.
-                var foreignKeyProperty = DommelMapper.ForeignKeyPropertyResolver.ResolveForeignKeyProperty(sourceType, includingType, out foreignKeyRelation);
+                PropertyInfo? foreignKeyProperty = DommelMapper.ForeignKeyPropertyResolver.ResolveForeignKeyProperty(sourceType, includingType, out foreignKeyRelation);
 
                 // Cache the info.
                 foreignKeyInfo = new ForeignKeyInfo(foreignKeyProperty, foreignKeyRelation);
@@ -97,7 +98,7 @@ namespace Dommel
         /// <returns>The table name in the database for <paramref name="type"/>.</returns>
         public static string Table(Type type, ISqlBuilder sqlBuilder)
         {
-            var key = $"{sqlBuilder.GetType()}.{type}";
+            string? key = $"{sqlBuilder.GetType()}.{type}";
             if (!TypeTableNameCache.TryGetValue(key, out var name))
             {
                 var tableName = DommelMapper.TableNameResolver.ResolveTableName(type);
@@ -141,7 +142,7 @@ namespace Dommel
         /// <returns>The column name in the database for <paramref name="propertyInfo"/>.</returns>
         public static string Column(PropertyInfo propertyInfo, ISqlBuilder sqlBuilder)
         {
-            var key = $"{sqlBuilder.GetType()}.{propertyInfo.DeclaringType}.{propertyInfo.Name}";
+            string? key = $"{sqlBuilder.GetType()}.{propertyInfo.DeclaringType}.{propertyInfo.Name}";
             if (!ColumnNameCache.TryGetValue(key, out var columnName))
             {
                 columnName = sqlBuilder.QuoteIdentifier(DommelMapper.ColumnNameResolver.ResolveColumnName(propertyInfo));

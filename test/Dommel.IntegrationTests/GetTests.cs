@@ -14,7 +14,7 @@ namespace Dommel.IntegrationTests
         public void Get(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var product = con.Get<Product>(1);
+            Product? product = con.Get<Product>(1);
             Assert.NotNull(product);
             Assert.NotEmpty(product!.Name);
         }
@@ -24,7 +24,7 @@ namespace Dommel.IntegrationTests
         public async Task GetAsync(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var product = await con.GetAsync<Product>(1);
+            Product? product = await con.GetAsync<Product>(1);
             Assert.NotNull(product);
             Assert.NotEmpty(product!.Name);
         }
@@ -34,7 +34,7 @@ namespace Dommel.IntegrationTests
         public void Get_ParamsOverload(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var product = con.Get<Product>(new object[] { 1 });
+            Product? product = con.Get<Product>(new object[] { 1 });
             Assert.NotNull(product);
             Assert.NotEmpty(product!.Name);
         }
@@ -44,7 +44,7 @@ namespace Dommel.IntegrationTests
         public async Task GetAsync_ParamsOverload(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var product = await con.GetAsync<Product>(new object[] { 1 });
+            Product? product = await con.GetAsync<Product>(new object[] { 1 });
             Assert.NotNull(product);
             Assert.NotEmpty(product!.Name);
         }
@@ -72,7 +72,7 @@ namespace Dommel.IntegrationTests
         public void Get_CompositeKey(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var product = con.Get<ProductsCategories>(1, 1);
+            ProductsCategories? product = con.Get<ProductsCategories>(1, 1);
             Assert.NotNull(product);
             Assert.Equal(1, product!.ProductId);
             Assert.Equal(1, product.CategoryId);
@@ -83,7 +83,7 @@ namespace Dommel.IntegrationTests
         public async Task GetAsync_CompositeKey(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var product = await con.GetAsync<ProductsCategories>(1, 1);
+            ProductsCategories? product = await con.GetAsync<ProductsCategories>(1, 1);
             Assert.NotNull(product);
             Assert.Equal(1, product!.ProductId);
             Assert.Equal(1, product.CategoryId);

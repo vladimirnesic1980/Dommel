@@ -23,7 +23,7 @@ namespace Dommel.IntegrationTests
         public virtual async Task InitializeAsync()
         {
             await CreateDatabase();
-            var created = await CreateTables();
+            bool created = await CreateTables();
 
             // Is the table created? If so, insert dummy data
             if (created)
@@ -31,7 +31,7 @@ namespace Dommel.IntegrationTests
                 using var connection = GetConnection();
                 await connection.OpenAsync();
 
-                var categoryId = Convert.ToInt32(await connection.InsertAsync(new Category { Name = "Food" }));
+                int categoryId = Convert.ToInt32(await connection.InsertAsync(new Category { Name = "Food" }));
 
                 var products = new List<Product>
                 {
@@ -54,11 +54,11 @@ namespace Dommel.IntegrationTests
 
                 await connection.InsertAllAsync(products);
 
-                var productId = (await connection.FirstOrDefaultAsync<Product>(x => x.Name == "Chai"))!.ProductId;
+                int productId = (await connection.FirstOrDefaultAsync<Product>(x => x.Name == "Chai"))!.ProductId;
                 await connection.InsertAsync(new ProductOption { ProductId = productId });
 
                 // Order 1
-                var orderId = Convert.ToInt32(await connection.InsertAsync(new Order { Created = new DateTime(2011, 1, 1) }));
+                int orderId = Convert.ToInt32(await connection.InsertAsync(new Order { Created = new DateTime(2011, 1, 1) }));
                 var orderLines = new List<OrderLine>
                     {
                         new OrderLine { OrderId = orderId, Line = "Line 1"},

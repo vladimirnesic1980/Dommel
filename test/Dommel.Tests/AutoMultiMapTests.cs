@@ -12,7 +12,7 @@ namespace Dommel.Tests
             var del = CreateMapDelegate<Product, Category, DontMap, DontMap, DontMap, DontMap, DontMap, Product>(new Dictionary<int, Product>());
             var product = new Product();
             var category = new Category();
-            var x = del.DynamicInvoke(product, category);
+            object? x = del.DynamicInvoke(product, category);
             var mappedProduct = Assert.IsType<Product>(x);
             Assert.NotNull(mappedProduct.Category);
         }
@@ -23,7 +23,7 @@ namespace Dommel.Tests
             var del = CreateMapDelegate<Product, Category, Category, DontMap, DontMap, DontMap, DontMap, Product>(new Dictionary<int, Product>());
             var product = new Product();
             var category = new Category();
-            var x = del.DynamicInvoke(product, category, category);
+            object? x = del.DynamicInvoke(product, category, category);
             var mappedProduct = Assert.IsType<Product>(x);
             Assert.NotNull(mappedProduct.Category);
         }
@@ -34,7 +34,7 @@ namespace Dommel.Tests
             var del = CreateMapDelegate<Product, Category, Category, Category, DontMap, DontMap, DontMap, Product>(new Dictionary<int, Product>());
             var product = new Product();
             var category = new Category();
-            var x = del.DynamicInvoke(product, category, category, category);
+            object? x = del.DynamicInvoke(product, category, category, category);
             var mappedProduct = Assert.IsType<Product>(x);
             Assert.NotNull(mappedProduct.Category);
         }
@@ -45,7 +45,7 @@ namespace Dommel.Tests
             var del = CreateMapDelegate<Product, Category, Category, Category, Category, DontMap, DontMap, Product>(new Dictionary<int, Product>());
             var product = new Product();
             var category = new Category();
-            var x = del.DynamicInvoke(product, category, category, category, category);
+            object? x = del.DynamicInvoke(product, category, category, category, category);
             var mappedProduct = Assert.IsType<Product>(x);
             Assert.NotNull(mappedProduct.Category);
         }
@@ -56,7 +56,7 @@ namespace Dommel.Tests
             var del = CreateMapDelegate<Product, Category, Category, Category, Category, Category, DontMap, Product>(new Dictionary<int, Product>());
             var product = new Product();
             var category = new Category();
-            var x = del.DynamicInvoke(product, category, category, category, category, category);
+            object? x = del.DynamicInvoke(product, category, category, category, category, category);
             var mappedProduct = Assert.IsType<Product>(x);
             Assert.NotNull(mappedProduct.Category);
         }
@@ -67,7 +67,7 @@ namespace Dommel.Tests
             var del = CreateMapDelegate<Product, Category, Category, Category, Category, Category, Category, Product>(new Dictionary<int, Product>());
             var product = new Product();
             var category = new Category();
-            var x = del.DynamicInvoke(product, category, category, category, category, category, category);
+            object? x = del.DynamicInvoke(product, category, category, category, category, category, category);
             var mappedProduct = Assert.IsType<Product>(x);
             Assert.NotNull(mappedProduct.Category);
         }

@@ -71,7 +71,7 @@ namespace Dommel.Json.Tests
             var json = JsonConvert.SerializeObject(data);
 
             // Act
-            var obj = TypeHandler.Parse(typeof(LeadData), json);
+            object? obj = TypeHandler.Parse(typeof(LeadData), json);
 
             // Assert
             var parsedData = Assert.IsType<LeadData>(obj);

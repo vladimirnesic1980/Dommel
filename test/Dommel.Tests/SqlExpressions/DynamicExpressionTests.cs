@@ -67,8 +67,8 @@ namespace Dommel.Tests
         {
             var ids = new[] { 1, 2 };
             var idList = new ArrayList { "1", "2" };
-            var guid1 = Guid.Parse("11111111-1111-1111-1111-111111111111");
-            var guid2 = Guid.Parse("22222222-2222-2222-2222-222222222222");
+            Guid guid1 = Guid.Parse("11111111-1111-1111-1111-111111111111");
+            Guid guid2 = Guid.Parse("22222222-2222-2222-2222-222222222222");
             var guidList = new List<Guid> { guid1, guid2 };
             var decimalList = new List<decimal> { 1.0m, 2.0m };
             Expression<Func<Foo, bool>> expression = p =>

@@ -557,7 +557,7 @@ namespace Dommel
             .Where(t => t != typeof(DontMap))
             .ToArray();
 
-            var sql = BuildMultiMapQuery(GetSqlBuilder(connection), resultType, includeTypes, id, out var parameters);
+            var sql = BuildMultiMapQuery(GetSqlBuilder(connection), resultType, includeTypes, id, out DynamicParameters? parameters);
             LogQuery<TReturn>(sql);
             var splitOn = CreateSplitOn(includeTypes);
 
@@ -589,7 +589,7 @@ namespace Dommel
             .Where(t => t != typeof(DontMap))
             .ToArray();
 
-            var sql = BuildMultiMapQuery(GetSqlBuilder(connection), resultType, includeTypes, id, out var parameters);
+            var sql = BuildMultiMapQuery(GetSqlBuilder(connection), resultType, includeTypes, id, out DynamicParameters? parameters);
             LogQuery<TReturn>(sql);
             var splitOn = CreateSplitOn(includeTypes);
 
@@ -625,14 +625,14 @@ namespace Dommel
             // Determine the table to join with.
             var sourceType = includeTypes[0];
             var sourceTableName = Resolvers.Table(sourceType, sqlBuilder);
-            for (var i = 1; i < includeTypes.Length; i++)
+            for (int i = 1; i < includeTypes.Length; i++)
             {
                 // Determine the table name of the joined table.
                 var includeType = includeTypes[i];
                 var foreignKeyTableName = Resolvers.Table(includeType, sqlBuilder);
 
                 // Determine the foreign key and the relationship type.
-                var foreignKeyProperty = Resolvers.ForeignKeyProperty(sourceType, includeType, out var relation);
+                var foreignKeyProperty = Resolvers.ForeignKeyProperty(sourceType, includeType, out ForeignKeyRelation relation);
                 var foreignKeyPropertyName = Resolvers.Column(foreignKeyProperty, sqlBuilder);
 
                 if (relation == ForeignKeyRelation.OneToOne)

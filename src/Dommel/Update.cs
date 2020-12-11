@@ -42,7 +42,7 @@ namespace Dommel
 
         internal static string BuildUpdateQuery(ISqlBuilder sqlBuilder, Type type)
         {
-            var cacheKey = new QueryCacheKey(QueryCacheType.Update, sqlBuilder, type);
+            QueryCacheKey cacheKey = new QueryCacheKey(QueryCacheType.Update, sqlBuilder, type);
             if (!QueryCache.TryGetValue(cacheKey, out var sql))
             {
                 var tableName = Resolvers.Table(type, sqlBuilder);

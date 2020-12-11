@@ -11,13 +11,13 @@ namespace Dommel.IntegrationTests
         public void Update(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var product = con.Get<Product>(1);
+            Product? product = con.Get<Product>(1);
             Assert.NotNull(product);
             product!.Name = "Test";
             product.SetSlug("test");
             con.Update(product);
 
-            var newProduct = con.Get<Product>(1);
+            Product? newProduct = con.Get<Product>(1);
             Assert.Equal("Test", newProduct!.Name);
             Assert.Equal("test", newProduct.Slug);
         }
@@ -27,13 +27,13 @@ namespace Dommel.IntegrationTests
         public async Task UpdateAsync(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var product = await con.GetAsync<Product>(1);
+            Product? product = await con.GetAsync<Product>(1);
             Assert.NotNull(product);
             product!.Name = "Test";
             product.SetSlug("test");
             await con.UpdateAsync(product);
 
-            var newProduct = await con.GetAsync<Product>(1);
+            Product? newProduct = await con.GetAsync<Product>(1);
             Assert.Equal("Test", newProduct!.Name);
             Assert.Equal("test", newProduct.Slug);
         }

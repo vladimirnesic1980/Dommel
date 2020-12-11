@@ -45,7 +45,7 @@ namespace Dommel.Json.IntegrationTests
             con.Update(lead);
 
             // Assert
-            var updatedLead = con.Get<Lead>(lead.Id);
+            Lead? updatedLead = con.Get<Lead>(lead.Id);
             Assert.NotNull(updatedLead);
             Assert.Equal("Bar", updatedLead!.Data?.FirstName);
         }
@@ -64,7 +64,7 @@ namespace Dommel.Json.IntegrationTests
             con.Update(lead);
 
             // Assert
-            var updatedLead = con.Get<Lead>(lead.Id);
+            Lead? updatedLead = con.Get<Lead>(lead.Id);
             Assert.NotNull(updatedLead);
             Assert.Equal("Bar", updatedLead!.Data?.FirstName);
         }

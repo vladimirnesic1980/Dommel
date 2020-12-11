@@ -13,7 +13,7 @@ namespace Dommel.IntegrationTests
         public void Project(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var p = con.Project<ProductSmall>(1);
+            ProductSmall? p = con.Project<ProductSmall>(1);
             Assert.NotNull(p);
             Assert.NotEqual(0, p!.ProductId);
             Assert.NotNull(p.Name);
@@ -24,7 +24,7 @@ namespace Dommel.IntegrationTests
         public async Task ProjectAsync(DatabaseDriver database)
         {
             using var con = database.GetConnection();
-            var p = await con.ProjectAsync<ProductSmall>(1);
+            ProductSmall? p = await con.ProjectAsync<ProductSmall>(1);
             Assert.NotNull(p);
             Assert.NotEqual(0, p!.ProductId);
             Assert.NotNull(p.Name);
